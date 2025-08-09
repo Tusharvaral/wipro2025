@@ -1,0 +1,10 @@
+package com.wipro.notificationms.controller;
+
+@RestController
+public class NotificationController {
+	@PostMapping("/notify")
+    public String notify(@RequestBody NotificationDTO dto) {
+        System.out.println("User " + dto.getUser().getUsername() + " information is " + dto.getAction());
+        return "Notification sent!";
+    }
+}

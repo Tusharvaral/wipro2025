@@ -1,0 +1,15 @@
+package com.wipro.userms.service;
+
+import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
+import com.wipro.userms.dto.Notification;
+
+@FeignClient(name = "notificationms")
+public interface NotificationConnectService {
+
+    @PostMapping("/notify")
+    ResponseEntity<Notification> sendNotification(@RequestBody Notification notification);
+}

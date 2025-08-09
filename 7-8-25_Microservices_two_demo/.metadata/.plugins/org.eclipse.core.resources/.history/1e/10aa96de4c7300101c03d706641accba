@@ -1,0 +1,11 @@
+package com.wipro.userms.service.impl;
+
+import org.springframework.stereotype.Service;
+
+import com.wipro.userms.service.UserService;
+
+@Service
+public class UserServiceImpl implements UserService {
+	@Autowired
+	UserRepo userRepo;
+}

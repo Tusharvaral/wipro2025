@@ -1,0 +1,5 @@
+package com.wipro.userms.service;
+
+public class NotificationConnectService {
+
+}

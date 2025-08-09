@@ -1,0 +1,5 @@
+package com.wipro.notificationms.service.impl;
+
+public class NotificationServiceImpl {
+
+}

@@ -1,0 +1,20 @@
+package com.wipro.userms.service.impl;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.wipro.userms.repo.UserRepo;
+import com.wipro.userms.service.NotificationConnectService;
+import com.wipro.userms.service.UserService;
+
+@Service
+public class UserServiceImpl implements UserService {
+	@Autowired
+	UserRepo userRepo;
+	
+	@Autowired
+	NotificationConnectService notificationConnectService;
+}
+
+
+

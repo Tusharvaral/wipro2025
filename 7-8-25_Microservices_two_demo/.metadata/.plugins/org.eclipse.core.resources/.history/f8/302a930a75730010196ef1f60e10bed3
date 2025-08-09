@@ -1,0 +1,6 @@
+package com.wipro.auth.controller;
+
+@RestController
+public class GreetController {
+
+}

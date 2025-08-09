@@ -1,0 +1,13 @@
+package com.wipro.car.service;
+
+import java.util.List;
+
+import com.wipro.car.entity.Car;
+
+public class CarService {
+	Car saveCar(Car car);
+    List<Car> getAllCars();
+    Optional<Car> getCarById(Long id);
+    Car updateCar(Long id, Car carDetails);
+    void deleteCar(Long id);
+}

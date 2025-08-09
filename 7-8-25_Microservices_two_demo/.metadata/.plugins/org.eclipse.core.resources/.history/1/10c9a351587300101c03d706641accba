@@ -1,0 +1,6 @@
+package com.wipro.notificationms.dto;
+
+public class Notification {
+	User user;
+    String action;
+}

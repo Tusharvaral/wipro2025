@@ -1,0 +1,9 @@
+package com.wipro.notificationms.dto;
+
+@Data
+public class User {
+	Long id;
+    String username;
+    String password;
+    String address;
+}

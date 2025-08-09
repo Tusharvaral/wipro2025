@@ -1,0 +1,7 @@
+package com.wipro.car.repo;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface CarRepo extends JpaRepository<T, ID> {
+
+}

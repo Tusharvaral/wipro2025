@@ -1,0 +1,12 @@
+package com.wipro.userms.dto;
+
+@Data
+public class NotificationDTO {
+	int id;
+	
+    String userName;
+	
+    double password;
+	
+    String userAddress;
+}

@@ -1,0 +1,36 @@
+package com.wipro.userms.controller;
+
+@RestController
+@RequestMapping("/users")
+public class UserController {
+
+    @Autowired
+    private UserService userService;
+
+    // Create
+    @PostMapping
+    public ResponseEntity<String> createUser(@RequestBody User user) {
+        String response = userService.createUser(user);
+        return ResponseEntity.ok(response);
+    }
+
+    // Read
+    @GetMapping("/{username}")
+    public ResponseEntity<User> getUser(@PathVariable String username) {
+        User user = userService.getUser(username);
+        return ResponseEntity.ok(user);
+    }
+
+    // Update
+    @PutMapping
+    public ResponseEntity<String> updateUser(@RequestBody User user) {
+        String response = userService.updateUser(user);
+        return ResponseEntity.ok(response);
+    }
+
+    // Delete
+    @DeleteMapping("/{username}")
+    public ResponseEntity<String> deleteUser(@PathVariable String username) {
+        String response = userService.deleteUser(username);
+        return ResponseEntity.ok(response);
+    }

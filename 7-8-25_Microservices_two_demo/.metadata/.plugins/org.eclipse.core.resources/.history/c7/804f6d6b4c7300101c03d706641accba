@@ -1,0 +1,10 @@
+package com.wipro.userms.service;
+
+import com.wipro.userms.dto.NotificationDTO;
+
+@FeignClient(name = "notification-ms")
+public interface NotificationConnectService {
+
+    @PostMapping("/notify")
+    ResponseEntity<String> sendNotification(@RequestBody NotificationDTO notification);
+}

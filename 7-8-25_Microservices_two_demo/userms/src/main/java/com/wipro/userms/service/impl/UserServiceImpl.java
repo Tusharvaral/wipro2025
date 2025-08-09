@@ -1,0 +1,73 @@
+package com.wipro.userms.service.impl;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.wipro.userms.dto.NotificationDto;
+import com.wipro.userms.dto.UserDto;
+import com.wipro.userms.entity.User;
+import com.wipro.userms.repo.UserRepo;
+import com.wipro.userms.service.NotificationConnectService;
+import com.wipro.userms.service.UserService;
+
+
+@Service
+public class UserServiceImpl implements UserService {
+	@Autowired
+	UserRepo userRepo;
+	
+	@Autowired
+	private NotificationConnectService notificationConnectService;
+	
+	static final String NOTIFICATION_SERVICE = "notificationService";
+
+    @Override
+    public User createUser(User user) {
+        User newUser = userRepo.save(user);
+        notify(newUser, "Created");
+        return newUser;
+    }
+
+    @Override
+    public User updateUser(int id, User user) {
+        User existing = userRepo.findById(id).orElseThrow();
+        existing.setUserName(user.getUserName());
+        existing.setPassword(user.getPassword());
+        existing.setUserAddress(user.getUserAddress());
+        User updated = userRepo.save(existing);
+        notify(updated, "Updated");
+        return updated;
+    }
+
+    @Override
+    public void deleteUser(int id) {
+        User existing = userRepo.findById(id).orElseThrow();
+        userRepo.delete(existing);
+        notify(existing, "Deleted");
+    }
+
+    @Override
+    public User getUser(int id) {
+        return userRepo.findById(id).orElseThrow();
+    }
+
+    @Override
+    public List<User> findAll() {
+        return userRepo.findAll();
+    }
+
+    private void notify(User user, String action) {
+        User dto = new User();
+        dto.setUserName(user.getUserName());
+        dto.setPassword(user.getPassword());
+        dto.setUserAddress(user.getUserAddress());
+
+        NotificationDto request = new NotificationDto(dto, action);
+        notificationConnectService.sendNotification(request);
+    }
+}
+
+
+

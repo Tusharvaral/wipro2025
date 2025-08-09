@@ -1,0 +1,17 @@
+package com.wipro.notificationms.service.impl;
+
+import org.springframework.stereotype.Service;
+
+import com.wipro.notificationms.dto.Notification;
+import com.wipro.notificationms.service.NotificationService;
+
+@Service
+public class NotificationServiceImpl implements NotificationService{
+
+	@Override
+	public void notifyAction(Notification request) {
+		System.out.println("User "+request.getUser().getUsername()+" is "+request.getAction());
+		
+	}
+
+}

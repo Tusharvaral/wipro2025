@@ -1,0 +1,14 @@
+package com.wipro.userms.dto;
+
+import lombok.Data;
+
+@Data
+public class Notification {
+	int id;
+	
+    String userName;
+	
+    double password;
+	
+    String userAddress;
+}

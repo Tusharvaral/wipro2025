@@ -1,0 +1,21 @@
+package com.wipro.userms.entity;
+
+import jakarta.persistence.Entity;
+
+@Entity
+@Table(name="users")
+@Data
+public class User {
+	@Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	int id;
+	
+	@Column(name="user_name")
+    String userName;
+	
+	@Column(name="password")
+    double password;
+	
+	@Column(name="user_address")
+    String userAddress;
+}

@@ -1,0 +1,25 @@
+package com.wipro.car.entity;
+
+import java.time.LocalDate;
+
+import jakarta.persistence.*;
+import lombok.Data;
+
+@Data
+@Table(name="carRegistrationDetail")
+@Entity
+public class CarRegistrationDetail {
+	@Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    Long id;
+	
+	@Column(name="registration_number")
+	int registrationNumber;
+	
+	@Column(name="dateof_registration")
+	LocalDate dateOfRegistration;
+	
+	@OneToOne(mappedBy = "registrationDetail")
+	@JsonBackReference
+    private Car car;
+}

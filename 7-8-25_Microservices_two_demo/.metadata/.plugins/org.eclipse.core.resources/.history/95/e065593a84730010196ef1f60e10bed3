@@ -1,0 +1,13 @@
+package com.wipro.car.entity;
+
+import jakarta.persistence.*;
+import lombok.Data;
+
+@Data
+@Entity
+public class Car {
+	
+	 @Id
+	 @GeneratedValue(strategy = GenerationType.IDENTITY)
+	 Long id;
+}

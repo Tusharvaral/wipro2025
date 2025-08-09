@@ -1,0 +1,24 @@
+package com.wipro.car.entity;
+
+//import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import jakarta.persistence.*;
+import lombok.Data;
+
+@Data
+@Table(name="car")
+@Entity
+public class Car {
+	
+	 @Id
+	 @GeneratedValue(strategy = GenerationType.IDENTITY)
+	 Long id;
+	 
+	 @Column(name="make")
+	 String make;
+	 
+	 @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+	 @JoinColumn(name = "registration_detail_id", referencedColumnName = "id")
+//	 @JsonManagedReference
+	 private CarRegistrationDetail registrationDetail;
+}

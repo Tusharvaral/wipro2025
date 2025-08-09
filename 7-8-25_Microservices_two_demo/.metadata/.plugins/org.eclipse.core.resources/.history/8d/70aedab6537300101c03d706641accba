@@ -1,0 +1,10 @@
+package com.wipro.userms.service;
+
+import com.wipro.userms.entity.User;
+
+public interface UserService {
+	String createUser(User user);
+    String updateUser(User user);
+    String deleteUser(String username);
+    User getUser(String username);
+}

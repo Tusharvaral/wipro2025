@@ -1,0 +1,7 @@
+package com.wipro.car.entity;
+
+@Data
+@Entity
+public class Car {
+
+}

@@ -1,0 +1,70 @@
+package com.wipro.userms.service.impl;
+
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+
+import com.wipro.userms.dto.Notification;
+import com.wipro.userms.entity.User;
+import com.wipro.userms.repo.UserRepo;
+import com.wipro.userms.service.NotificationConnectService;
+import com.wipro.userms.service.UserService;
+
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+
+@Service
+public class UserServiceImpl implements UserService {
+	@Autowired
+	UserRepo userRepo;
+	
+	@Autowired
+	NotificationConnectService notificationConnectService;
+	
+	 @Override
+	    @CircuitBreaker(name = "user-cb", fallbackMethod = "notifyFallback")
+	    public String createUser(User user) {
+	        userRepo.save(user);
+	        ResponseEntity<String> response = notificationConnectService.sendNotification(new NotificationDTO(user, "Created"));
+	        return response.getStatusCode() == HttpStatusCode.valueOf(200) ? "User created & notified." : "User created, notification failed.";
+	    }
+
+	    @Override
+	    @CircuitBreaker(name = "user-cb", fallbackMethod = "notifyFallback")
+	    public String updateUser(User user) {
+	        userRepo.save(user);
+	        ResponseEntity<String> response = notificationConnectService.sendNotification(new NotificationDTO(user, "Updated"));
+	        return response.getStatusCode() == HttpStatusCode.valueOf(200) ? "User updated & notified." : "User updated, notification failed.";
+	    }
+
+	    @Override
+	    @CircuitBreaker(name = "user-cb", fallbackMethod = "notifyFallbackDelete")
+	    public String deleteUser(String username) {
+	        Optional<User> optionalUser = userRepo.findById(username);
+	        if (optionalUser.isPresent()) {
+	            userRepo.deleteById(username);
+	            ResponseEntity<String> response = notificationConnectService.sendNotification(new NotificationDTO(optionalUser.get(), "Deleted"));
+	            return response.getStatusCode() == HttpStatusCode.valueOf(200) ? "User deleted & notified." : "User deleted, notification failed.";
+	        } else {
+	            return "User not found.";
+	        }
+	    }
+
+	    @Override
+	    public User getUser(String username) {
+	        return userRepo.findById(username).orElse(null);
+	    }
+
+	    public String notifyFallback(User user, Throwable t) {
+	        return "User processed but notification service is down.";
+	    }
+
+	    public String notifyFallbackDelete(String username, Throwable t) {
+	        return "User deleted but notification service is down.";
+	    }
+}
+
+
+

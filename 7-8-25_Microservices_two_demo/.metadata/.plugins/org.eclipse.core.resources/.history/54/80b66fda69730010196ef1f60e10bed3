@@ -1,0 +1,10 @@
+package com.wipro.userms.dto;
+
+import lombok.Data;
+import com.wipro.userms.entity.User;
+
+@Data
+public class NotificationDto {
+	User user;
+	String action;
+}

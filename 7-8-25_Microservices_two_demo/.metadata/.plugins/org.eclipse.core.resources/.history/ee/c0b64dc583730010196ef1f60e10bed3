@@ -1,0 +1,9 @@
+package com.wipro.car.entity;
+
+@Data
+@Entity
+public class CarRegistrationDetail {
+	@Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    Long id;
+}
